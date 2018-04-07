@@ -1,18 +1,18 @@
-sample = imread('sample.png');
-imshow(sample);
-point = [168 234 1; 174 366 1; 392 541 1; 392 401 1; 606 429 1; 613 286 1; 387 144 1];
+img = imread('sony.png');
+%imshow(img);
+pt = [168 234 1; 174 366 1; 392 541 1; 392 401 1; 606 429 1; 613 286 1; 387 144 1; 384 269 1];
 
-line21=cross(point(2,:), point(1,:));
-line34=cross(point(3,:), point(4,:));
-line56=cross(point(5,:), point(6,:));
+line21=cross(pt(2,:), pt(1,:));
+line34=cross(pt(3,:), pt(4,:));
+line56=cross(pt(5,:), pt(6,:));
 
-line32=cross(point(3,:), point(2,:));
-line41=cross(point(4,:), point(1,:));
-line67=cross(point(6,:), point(7,:));
+line32=cross(pt(3,:), pt(2,:));
+line41=cross(pt(4,:), pt(1,:));
+line67=cross(pt(6,:), pt(7,:));
 
-line17=cross(point(1,:), point(7,:));
-line46=cross(point(4,:), point(6,:));
-line35=cross(point(3,:), point(5,:));
+line17=cross(pt(1,:), pt(7,:));
+line46=cross(pt(4,:), pt(6,:));
+line35=cross(pt(3,:), pt(5,:));
 
 %line([point(2, 1) point(1, 1)], [point(2, 2) point(1, 2)], 'Color', 'red', 'LineWidth', 2);
 %line([point(3, 1) point(4, 1)], [point(3, 2) point(4, 2)], 'Color', 'red', 'LineWidth', 2);
@@ -20,7 +20,7 @@ line35=cross(point(3,:), point(5,:));
 
 M1 = line21'*line21 + line34'*line34 + line56'*line56;
 [~, ~, v] = svd(M1);
-vx = v(:, 3)'/v(3,3);
+vz = v(:, 3)'/v(3,3);
 
 M2 = line32'*line32 + line41'*line41 + line67'*line67;
 [~, ~, v] = svd(M2);
@@ -28,11 +28,40 @@ vy = v(:, 3)'/v(3,3);
 
 M3 = line17'*line17 + line46'*line46 + line35'*line35;
 [~, ~, v] = svd(M3);
-vz = v(:, 3)'/v(3,3);
+vx = v(:, 3)'/v(3,3);
 
-l = cross(vx, vy)/norm(cross(vx, vy));
+o = pt(3,:);
 
-ax = -1/300*norm(cross(point(3,:),point(5,:)))/norm(cross(vx,point(5,:)))/(l*point(3,:)');
-ay = -1/400*norm(cross(point(3,:),point(2,:)))/norm(cross(vy,point(2,:)))/(l*point(3,:)');
-az = -1/183*norm(cross(point(3,:),point(4,:)))/norm(cross(vz,point(4,:)))/(l*point(3,:)');
-P = [ax*vx' ay*vy' az*vz' l'];
+ax = (pt(5,:)-o)/(vx-pt(5,:))/300;
+ay = (pt(2,:)-o)/(vy-pt(2,:))/400;
+az = (pt(4,:)-o)/(vz-pt(4,:))/183;
+P = [ax*vx' -ay*vy' -az*vz' o'];
+%P = [P(:,1) -P(:,2) -P(:,3) P(:,4)];
+
+Hxy = [P(:,1:2),P(:,4)];
+Hxz = [P(:,1),P(:,3:4)];
+Hyz = P(:,2:4);
+
+tform = projective2d(inv(Hxy)');
+B = imwarp(img, tform);
+
+tform = projective2d(inv(Hxz)');
+B = imwarp(img, tform);
+
+tform = projective2d(inv(Hyz)');
+B = imwarp(img, tform);
+
+b0 = o;
+t0 = pt(4,:);
+b = pt(5,:);
+r = pt(6,:);
+v = cross(cross(b,b0),cross(vx,vy));
+t = cross(cross(v,t0),cross(r,b));
+H = 183;
+v = v/v(3);
+t = t/t(3);
+R = H*norm(r-b)*norm(vz-t)/norm(t-b)/norm(vz-r);
+
+Hz = [ax*vx' ay*vy' az*183*vz'+o'];
+w = Hz\r';
+w = w/w(3);
