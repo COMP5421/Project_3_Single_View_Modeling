@@ -1,0 +1,135 @@
+#VRML V2.0 utf8
+
+Collision
+{
+	collide FALSE
+	children
+	[
+		Shape
+		{
+			appearance Appearance
+			{
+				texture ImageTexture
+				{
+					url "Hxy.bmp"
+				}
+			}
+			geometry IndexedFaceSet
+			{
+				coord Coordinate
+				{
+					point
+					[
+						-0.1353 0.1143 183.000000,
+						298.1369 -4.5363 183.000000,
+						309.4181 398.4043 183.000000,
+						0.6524 401.3327 183.000000,
+					]
+				}
+				coordIndex
+				[
+					0, 1, 2, 3, -1,
+				]
+				texCoord TextureCoordinate
+				{
+					point
+					[
+						-0.000000 0.000000,
+						1.000000 0.000000,
+						1.000000 1.000000,
+						-0.000000 1.000000,
+					]
+				}
+				texCoordIndex
+				[
+					0, 1, 2, 3, -1,
+				]
+				solid FALSE
+			}
+		}
+		Shape
+		{
+			appearance Appearance
+			{
+				texture ImageTexture
+				{
+					url "Hxz.bmp"
+				}
+			}
+			geometry IndexedFaceSet
+			{
+				coord Coordinate
+				{
+					point
+					[
+						-0.1353 0.1143 0.000000,
+						298.1369 -4.5363 0.000000,
+						298.1369 -4.5363 183.000000,
+						-0.1353 0.1143 183.000000,
+					]
+				}
+				coordIndex
+				[
+					0, 1, 2, 3, -1,
+				]
+				texCoord TextureCoordinate
+				{
+					point
+					[
+						-0.000000 0.000000,
+						1.000000 0.000000,
+						1.000000 1.000000,
+						-0.000000 1.000000,
+					]
+				}
+				texCoordIndex
+				[
+					0, 1, 2, 3, -1,
+				]
+				solid FALSE
+			}
+		}
+		Shape
+		{
+			appearance Appearance
+			{
+				texture ImageTexture
+				{
+					url "Hyz.bmp"
+				}
+			}
+			geometry IndexedFaceSet
+			{
+				coord Coordinate
+				{
+					point
+					[
+						0.6524 401.3327 0.000000,
+						-0.1353 0.1143 0.000000,
+						-0.1353 0.1143 183.000000,
+						0.6524 401.3327 183.000000,
+					]
+				}
+				coordIndex
+				[
+					0, 1, 2, 3, -1,
+				]
+				texCoord TextureCoordinate
+				{
+					point
+					[
+						-0.000000 0.000000,
+						1.000000 0.000000,
+						1.000000 1.000000,
+						-0.000000 1.000000,
+					]
+				}
+				texCoordIndex
+				[
+					0, 1, 2, 3, -1,
+				]
+				solid FALSE
+			}
+		}
+	]
+}
