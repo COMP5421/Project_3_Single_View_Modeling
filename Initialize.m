@@ -21,11 +21,14 @@ ParallelLineX = rand(0,3);
 ParallelLineY = rand(0,3);
 ParallelLineZ = rand(0,3);
 
-global vx vy vz vl;
+global vx vy vz;
+global vlxy vlxz vlyz;
 vx=double([0 0 0]);
 vy=double([0 0 0]);
 vz=double([0 0 0]);
-vl=double([0 0 0]);
+vlxy = double([0 0 0]);
+vlxz = double([0 0 0]);
+vlyz = double([0 0 0]);
 
 global afa;
 afa=0;

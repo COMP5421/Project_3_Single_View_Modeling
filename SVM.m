@@ -162,16 +162,19 @@ function Load_VP_Callback(hObject, eventdata, handles)
 % hObject    handle to Load_VP (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global vx vy vz vl;
+global vx vy vz;
+global vlxy vlxz vlyz;
 [FileName, PathName, FilterIndex] = uigetfile('.txt');
 file = fullfile(PathName,FileName);
 fid = fopen(file,'r');
 stored = fscanf(fid,'%f');
-vx = stored(1:3);
-vy = stored(4:6);
-vz = stored(7:9);
-vl = stored(10:12);
-disp(vx);disp(vy);disp(vz);disp(vl);
+vx = stored(1:3)';
+vy = stored(4:6)';
+vz = stored(7:9)';
+vlxy = stored(10:12)';
+vlxz = stored(13:15)';
+vlyz = stored(16:18)';
+disp(vx);disp(vy);disp(vz);disp(vlxy);disp(vlxz);disp(vlyz);
 disp('Vanishing Points & Vanishing Line Loaded');
 fclose(fid);
 
@@ -180,12 +183,15 @@ function Save_VP_Callback(hObject, eventdata, handles)
 % hObject    handle to Save_VP (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global vx vy vz vl;
+global vx vy vz;
+global vlxy vlxz vlyz;
 fid = fopen('vanishing.txt','w');
 fprintf(fid,'%9.5f %9.5f %9.5f\n',vx(1),vx(2),vx(3));
 fprintf(fid,'%9.5f %9.5f %9.5f\n',vy(1),vy(2),vy(3));
 fprintf(fid,'%9.5f %9.5f %9.5f\n',vz(1),vz(2),vz(3));
-fprintf(fid,'%9.8f %9.8f %9.8f\n',vl(1),vl(2),vl(3));
+fprintf(fid,'%9.8f %9.8f %9.8f\n',vlxy(1),vlxy(2),vlxy(3));
+fprintf(fid,'%9.8f %9.8f %9.8f\n',vlxz(1),vlxz(2),vlxz(3));
+fprintf(fid,'%9.8f %9.8f %9.8f\n',vlyz(1),vlyz(2),vlyz(3));
 fclose(fid);
 disp('Vanishing Points & Vanishing Line Saved');
 
@@ -228,7 +234,7 @@ function Texture_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 handles = guidata(hObject);
-GetTexture2(handles.width,handles.length);
+GetTexture(handles.width,handles.length);
 guidata(hObject, handles);
 
 

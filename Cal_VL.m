@@ -1,6 +1,7 @@
 function Cal_VL()
 global ParallelLineX ParallelLineY ParallelLineZ;
-global vx vy vz vl;
+global vx vy vz;
+global vlxy vlxz vlyz;
 n = size(ParallelLineX, 1);
 
 if n > 1
@@ -47,8 +48,18 @@ if n > 1
 end
 
 if (size(ParallelLineX,1)>1)&&(size(ParallelLineY,1)>1)
-    vl = cross(vx,vy);
-    vl = vl./vl(3);
+    vlxy = cross(vx,vy);
+    vlxy = vlxy./vlxy(3);
+end
+
+if (size(ParallelLineY,1)>1)&&(size(ParallelLineZ,1)>1)
+    vlyz = cross(vy,vz);
+    vlyz = vlyz./vlyz(3);
+end
+
+if (size(ParallelLineX,1)>1)&&(size(ParallelLineZ,1)>1)
+    vlxz = cross(vx,vz);
+    vlxz = vlxz./vlxz(3);
 end
 
 end

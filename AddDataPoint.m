@@ -63,15 +63,21 @@ switch DataType
         len = str2double(Input_Length{1});
         switch Direction
             case 'X'
-                a_x = (sum(vx - [x; y; 1.0]) \ sum([x, y, 1.0] - double([Origin, 1]))) / len;
+                a_x = sum(sum(vx - [x y 1.0]) \ sum([x, y, 1.0] - double([Origin, 1]))) / len;
+                %a_x = (vx - [x; y; 1.0]) \ ([x, y, 1.0] - double([Origin, 1]))' / len;
                 rpoints(1,:) = [x, y, len, 0, 0];
+                
             case 'Y'
-                a_y = (sum(vy - [x; y; 1.0]) \ sum([x, y, 1.0] - double([Origin, 1]))) / len;
+                a_y = sum(sum(vy - [x y 1.0]) \ sum([x, y, 1.0] - double([Origin, 1]))) / len;
+                %a_y = (vy - [x; y; 1.0]) \ ([x, y, 1.0] - double([Origin, 1]))' / len;
                 rpoints(2,:) = [x, y, 0, len, 0];
+                
             case 'Z'
-                a_z = (sum(vz - [x; y; 1.0]) \ sum([x, y, 1.0] - double([Origin, 1]))) / len;
+                a_z = sum(sum(vz - [x y 1.0]) \ sum([x, y, 1.0] - double([Origin, 1]))) / len;
+                %a_z = (vz - [x; y; 1.0]) \ ([x, y, 1.0] - double([Origin, 1]))' / len;
                 rpoints(3,:) = [x, y, 0, 0, len];
                 hpoint = [x,y,0,0,len];
+                
         end
         disp(x);disp(y);
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%       
@@ -96,8 +102,6 @@ switch DataType
 %         points = [points; x y a b c];
 %         disp(x);disp(y);
 
-
-    
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end
 end

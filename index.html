@@ -139,10 +139,10 @@ table td img {
 
 
 <div class="container">
-<h2><b>Overview</b></h2> 
+<h3><b>Overview</b></h3> 
 <p>
 	In this project we create 3D texture-mapped models from a single image using the single view modeling method discussed in class.<br>
-	We build 3D models from both paintings and real world images, with each model contains at least 10 text features. view3dscene is utilized to visualize the VRML model.
+	We build 3D models from both painting and real world image, with each model contains at least 10 text features. view3dscene is utilized to visualize the VRML model.
 </p>
 
 <p>
@@ -158,16 +158,63 @@ table td img {
 </div>
 
 
+<div class="container">
+<h3><b>Calculate Vanishing Point</b></h3> 
+<p>
+	Bob collins' algorithm is used to compute vanishing points.<br>For example, to compute the vanishing point x, we first select a group of lines that are all parallel to the x axis and compute the following "second moment" matrix M<br>
+	<td> <img src="html/Bob.png" width="50%"/> </td><br>
+	Finally, apply singular value decomposition to M, and the eigenvector associated with the smallest eigenvalue is the vanishing point vector V.
+</p>
+</div>
+
+<div class="container">
+<h3><b>Select Reference Point</b></h3> 
+<p>
+	After choosing the origin point, it is essential to choose the proper reference points and set the scalar, which will directly affect the computation of transformation matrix. <br>By default, we choose three reference points respectively from x, y and z axis that are pre-defined by the user, and input appropriate scalars.<br>If the real scalar(dimension) is not accessible, a oil painting, for example. We can simply treat all axis as unit dimension. 
+</p>
+</div>
+
+
+<div class="container">
+<h3><b>Measuring Height</b></h3> 
+<p>
 To calculate the height of a certain object in the image, we utilize the following equation.<br>
 <td> <img src="html/height.png" width="30%"/> </td><br>
 
 
 The most important part is to obtain the position of <b>b</b>, where line <b>br</b> is perpendicular to the <b>Hxy</b> plane. Here we project <b>b</b> to both x and y axis to find its coordinate in the 3d scene.<br>
+</p>
+</div>
+
+
+<div class="container">
+<h3><b>Image Warping</b></h3> 
+<p>
+After getting all desird transformation matrix, it is time to do the image tranformation. imwarp is used to do so.<br>
+<div align="center">
+<table border=1>
+
+<tr>
+<td><b><font size="5">Hxy</font></b></td>
+<td><b><font size="5">Hyz</font></b></td>
+<td><b><font size="5">Hxz</font></b></td>
+</tr>
+
+<tr>
+<td> <img src="html/Sony_Hxy.png" width="70%"/> </td>
+<td> <img src="html/Sony_Hyz.png" width="70%"/> </td>
+<td> <img src="html/Sony_Hxz.png" width="70%"/> </td>
+</tr>
+</table>
+</div>
+Then we can use the intelligent scissor from project1 to cut the region of interest and get corresponding texture.
+</p>
+</div>
 
 
 
 <div class="container">
-<h3><b>Artifact: painting</b></h3>
+<h3><b>Artifact: Painting</b></h3>
 <p>We have implemented our algorithm to a Second Pompeian Style Roman wall painting, where 10 textures are obtained and displayed in below.<br>
 	Front wall, left wall, right wall, floor, desk frontface, desk topface, chair frontface, chair topface and two arch-like ceilings.
 </p>
@@ -191,7 +238,7 @@ The most important part is to obtain the position of <b>b</b>, where line <b>br<
 
 
 <div class="container">
-<h3><b>Artifact: real world</b></h3>
+<h3><b>Artifact: Office</b></h3>
 <p>We have tested the program on a photo shot in a laboratory, where 10 textures are obtained and displayed in below.<br>
 	Three cases and one barrier on the right, front door and wall, two left curtains and ceiling.
 </p>
