@@ -1,7 +1,6 @@
 function GetTexture(img_width,img_length)
 global transformH;
 global setPlanes;
-global points;
 global picture;
 global textureOrigins;
 global Hxy Hxz Hyz;
