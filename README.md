@@ -5,4 +5,4 @@ vanishing point for a direction not parallel to plane. The algorithm is based on
 Detailed project description:
 * [Single View Modeling](https://course.cse.ust.hk/comp5421/Password_Only/projects/svm/index.html) - HKUST ITSC required to log in. <br />
 
-Please refer to **[Project Report](https://comp5421.github.io/Project_3_Sigle_View_Modeling/)** for detailed project evaluation.
+Please refer to **[Project Report](https://comp5421.github.io/Project_3_Single_View_Modeling/)** for detailed project evaluation.
